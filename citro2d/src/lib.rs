@@ -4,7 +4,11 @@ use citro2d_sys::*;
 use ctru::services::gfx::Gfx;
 
 pub mod color;
+pub mod error;
+pub mod text;
 pub use color::Color;
+pub use error::Error;
+pub use text::{Text, TextBuf};
 
 const C3D_DEFAULT_CMDBUF_SIZE: usize = 0x40000;
 const C3D_FRAME_SYNCDRAW: u8 = 0x01;
@@ -24,15 +28,15 @@ pub struct Frame;
 pub struct Scene;
 
 impl<'gfx> Citro2d<'gfx> {
-    pub fn new(gfx: &'gfx Gfx) -> Result<Self, ()> {
+    pub fn new(gfx: &'gfx Gfx) -> Result<Self, Error> {
         unsafe {
             if !C3D_Init(C3D_DEFAULT_CMDBUF_SIZE) {
-                return Err(());
+                return Err(Error::C3dInitFailed);
             }
 
             if !C2D_Init(C2D_DEFAULT_MAX_OBJECTS as usize) {
                 C3D_Fini();
-                return Err(());
+                return Err(Error::C2dInitFailed);
             }
 
             C2D_Prepare();
@@ -105,6 +109,10 @@ impl Scene {
         unsafe {
             C2D_DrawLine(x0, y0, color.into(), x1, y1, color.into(), thickness, 0.0);
         }
+    }
+
+    pub fn draw_text(&mut self, text: &Text, x: f32, y: f32, scale: f32, color: Color) {
+        text.draw(x, y, 0.0, scale, color);
     }
 }
 
