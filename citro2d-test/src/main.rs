@@ -1,5 +1,4 @@
-use citro2d::Citro2d;
-use citro2d_sys::C2D_Color32;
+use citro2d::{Citro2d, Color};
 use ctru::prelude::*;
 
 fn main() {
@@ -9,11 +8,11 @@ fn main() {
 
     let c2d = Citro2d::new(&gfx).expect("Failed to init citro2d");
 
-    let black = unsafe { C2D_Color32(0, 0, 0, 255) };
-    let red = unsafe { C2D_Color32(200, 50, 50, 255) };
-    let white = unsafe { C2D_Color32(255, 255, 255, 255) };
-    let blue = unsafe { C2D_Color32(50, 100, 200, 255) };
-    let green = unsafe { C2D_Color32(50, 180, 50, 255) };
+    let black = Color::rgb(0, 0, 0);
+    let red = Color::rgb(200, 50, 50);
+    let white = Color::rgb(255, 255, 255);
+    let blue = Color::rgb(50, 100, 200);
+    let green = Color::rgb(50, 180, 50);
 
     while apt.main_loop() {
         hid.scan_input();
@@ -23,9 +22,9 @@ fn main() {
 
         c2d.frame(|frame| {
             frame.scene(c2d.top_screen(), black, |scene| {
-                scene.draw_rect(0.0, 0.0, 400.0, 240.0, red);
+                scene.draw_rect(0.0, 0.0, 400.0, 240.0, blue);
                 scene.draw_rect(100.0, 60.0, 200.0, 120.0, white);
-                scene.draw_circle(200.0, 120.0, 40.0, blue);
+                scene.draw_circle(200.0, 120.0, 40.0, red);
             });
             frame.scene(c2d.bottom_screen(), black, |scene| {
                 scene.draw_rect(0.0, 0.0, 320.0, 240.0, green);

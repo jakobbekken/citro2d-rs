@@ -3,6 +3,9 @@
 use citro2d_sys::*;
 use ctru::services::gfx::Gfx;
 
+pub mod color;
+pub use color::Color;
+
 const C3D_DEFAULT_CMDBUF_SIZE: usize = 0x40000;
 const C3D_FRAME_SYNCDRAW: u8 = 0x01;
 
@@ -70,9 +73,14 @@ impl<'gfx> Citro2d<'gfx> {
 }
 
 impl Frame {
-    pub fn scene<F: FnOnce(&mut Scene)>(&mut self, target: &RenderTarget, clear_color: u32, f: F) {
+    pub fn scene<F: FnOnce(&mut Scene)>(
+        &mut self,
+        target: &RenderTarget,
+        clear_color: Color,
+        f: F,
+    ) {
         unsafe {
-            C2D_TargetClear(target.ptr, clear_color);
+            C2D_TargetClear(target.ptr, clear_color.into());
             C2D_SceneBegin(target.ptr);
         }
         let mut scene = Scene;
@@ -81,21 +89,21 @@ impl Frame {
 }
 
 impl Scene {
-    pub fn draw_rect(&mut self, x: f32, y: f32, w: f32, h: f32, color: u32) {
+    pub fn draw_rect(&mut self, x: f32, y: f32, w: f32, h: f32, color: Color) {
         unsafe {
-            C2D_DrawRectSolid(x, y, 0.0, w, h, color);
+            C2D_DrawRectSolid(x, y, 0.0, w, h, color.into());
         }
     }
 
-    pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: u32) {
+    pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: Color) {
         unsafe {
-            C2D_DrawCircleSolid(x, y, 0.0, radius, color);
+            C2D_DrawCircleSolid(x, y, 0.0, radius, color.into());
         }
     }
 
-    pub fn draw_line(&mut self, x0: f32, y0: f32, x1: f32, y1: f32, thickness: f32, color: u32) {
+    pub fn draw_line(&mut self, x0: f32, y0: f32, x1: f32, y1: f32, thickness: f32, color: Color) {
         unsafe {
-            C2D_DrawLine(x0, y0, color, x1, y1, color, thickness, 0.0);
+            C2D_DrawLine(x0, y0, color.into(), x1, y1, color.into(), thickness, 0.0);
         }
     }
 }
