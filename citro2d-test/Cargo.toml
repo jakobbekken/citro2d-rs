@@ -1,0 +1,9 @@
+[package]
+name = "citro2d-test"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+citro2d-sys = { path = "../citro2d-sys" }
+ctru-rs = { git = "https://github.com/rust3ds/ctru-rs.git" }
+ctru-sys = { git = "https://github.com/rust3ds/ctru-rs.git" }

@@ -1,0 +1,6 @@
+[workspace]
+members = [
+    "citro2d-sys",
+    "citro2d", "citro2d-test",
+]
+resolver = "2"
