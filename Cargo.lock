@@ -82,6 +82,10 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 [[package]]
 name = "citro2d"
 version = "0.1.0"
+dependencies = [
+ "citro2d-sys",
+ "ctru-rs",
+]
 
 [[package]]
 name = "citro2d-sys"
@@ -100,6 +104,7 @@ dependencies = [
 name = "citro2d-test"
 version = "0.1.0"
 dependencies = [
+ "citro2d",
  "citro2d-sys",
  "ctru-rs",
  "ctru-sys",
