@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    beanches: [main, dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install devkitPro
+        uses: devkitpro/setup-devkitpro@v1
+        with:
+          packages: 3ds-dev
+
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src
+
+      - name: Install cargo-3ds
+        run: cargo install cargo-3ds
+
+      - name: Build
+        run: cargo 3ds build --workspace --exclude citro2d-test
+
+      - name: Clippy
+        run: cargo 3ds clippy --workspace --exclude citro2d-test
+
+      - name: Format check
+        run: cargo fmt --all -- --check
