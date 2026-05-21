@@ -14,4 +14,7 @@ pub enum Error {
     ///
     /// The system ran out of memory for the glyph buffer.
     TextBufAllocFailed,
+
+    SpriteSheetLoadFailed,
+    SpriteIndexOutOfBounds,
 }

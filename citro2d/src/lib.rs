@@ -51,9 +51,11 @@ use ctru::services::gfx::Gfx;
 
 pub mod color;
 pub mod error;
+pub mod sprite;
 pub mod text;
 pub use color::Color;
 pub use error::Error;
+pub use sprite::{Sprite, SpriteSheet};
 pub use text::{Text, TextBuf};
 
 const C3D_DEFAULT_CMDBUF_SIZE: usize = 0x40000;
@@ -260,6 +262,10 @@ impl Scene {
     /// * `color` - Text color
     pub fn draw_text(&mut self, text: &Text, x: f32, y: f32, scale: f32, color: Color) {
         text.draw(x, y, 0.0, scale, color);
+    }
+
+    pub fn draw_sprite(&mut self, sprite: &Sprite) {
+        sprite.draw();
     }
 }
 
