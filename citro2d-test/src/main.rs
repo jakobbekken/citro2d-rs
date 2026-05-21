@@ -10,7 +10,6 @@ fn main() {
 
     let black = Color::rgb(0, 0, 0);
     let white = Color::rgb(255, 255, 255);
-    // let red = Color::rgb(200, 50, 50);
     let blue = Color::rgb(50, 100, 200);
     let green = Color::rgb(50, 180, 50);
 

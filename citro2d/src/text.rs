@@ -63,7 +63,7 @@ impl Text {
                 z,
                 scale,
                 scale,
-                u32::from(color),
+                color.value,
             );
         }
     }

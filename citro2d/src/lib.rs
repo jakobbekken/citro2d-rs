@@ -84,7 +84,7 @@ impl Frame {
         f: F,
     ) {
         unsafe {
-            C2D_TargetClear(target.ptr, clear_color.into());
+            C2D_TargetClear(target.ptr, clear_color.value);
             C2D_SceneBegin(target.ptr);
         }
         let mut scene = Scene;
@@ -95,19 +95,19 @@ impl Frame {
 impl Scene {
     pub fn draw_rect(&mut self, x: f32, y: f32, w: f32, h: f32, color: Color) {
         unsafe {
-            C2D_DrawRectSolid(x, y, 0.0, w, h, color.into());
+            C2D_DrawRectSolid(x, y, 0.0, w, h, color.value);
         }
     }
 
     pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: Color) {
         unsafe {
-            C2D_DrawCircleSolid(x, y, 0.0, radius, color.into());
+            C2D_DrawCircleSolid(x, y, 0.0, radius, color.value);
         }
     }
 
     pub fn draw_line(&mut self, x0: f32, y0: f32, x1: f32, y1: f32, thickness: f32, color: Color) {
         unsafe {
-            C2D_DrawLine(x0, y0, color.into(), x1, y1, color.into(), thickness, 0.0);
+            C2D_DrawLine(x0, y0, color.value, x1, y1, color.value, thickness, 0.0);
         }
     }
 
