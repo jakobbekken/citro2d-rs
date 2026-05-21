@@ -1,0 +1,46 @@
+name: CI
+
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkitarm:latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y clang llvm
+
+      - name: Install Rust nightly
+        uses: dtolnay/rust-toolchain@nightly
+        with:
+          components: rust-src, clippy, rustfmt
+
+      - name: Install cargo-3ds
+        run: cargo install cargo-3ds
+
+      - name: Build
+        run: cargo 3ds build --workspace --exclude citro2d-test
+        env:
+          DEVKITPRO: /opt/devkitpro
+          DEVKITARM: /opt/devkitpro/devkitARM
+          LIBCLANG_PATH: /usr/lib/llvm-14/lib
+
+      - name: Clippy
+        run: cargo 3ds clippy --workspace --exclude citro2d-test
+        env:
+          DEVKITPRO: /opt/devkitpro
+          DEVKITARM: /opt/devkitpro/devkitARM
+          LIBCLANG_PATH: /usr/lib/llvm-14/lib
+
+      - name: Format check
+        run: cargo fmt --all -- --check
