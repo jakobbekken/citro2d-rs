@@ -32,3 +32,4 @@ The easiest way to do this is to use the development flake with nix. This still 
 ## License
 
 This project is licensed under the [zlib license](LICENSE).
+
