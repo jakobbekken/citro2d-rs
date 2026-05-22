@@ -15,6 +15,13 @@ pub enum Error {
     /// The system ran out of memory for the glyph buffer.
     TextBufAllocFailed,
 
+    /// Failed to load a [`SpriteSheet`](crate::SpriteSheet).
+    ///
+    /// The file was not found, invalid data, or memory allocation failed.
     SpriteSheetLoadFailed,
+
+    /// Sprite index was out of bounds for the [`SpriteSheet`](crate::SpriteSheet).
+    ///
+    /// The index must be less than [`SpriteSheet::len`](crate::SpriteSheet::len).
     SpriteIndexOutOfBounds,
 }

@@ -264,6 +264,7 @@ impl Scene {
         text.draw(x, y, 0.0, scale, color);
     }
 
+    /// Draws a [`Sprite`].
     pub fn draw_sprite(&mut self, sprite: &Sprite) {
         sprite.draw();
     }
