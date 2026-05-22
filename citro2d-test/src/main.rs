@@ -1,4 +1,4 @@
-use citro2d::{Citro2d, Color, TextBuf};
+use citro2d::{Citro2d, Color, SpriteSheet, TextBuf};
 use ctru::prelude::*;
 
 fn main() {
@@ -15,6 +15,14 @@ fn main() {
 
     let text_buf = TextBuf::new(256).expect("Failed to create text buffer");
 
+    let sheet = SpriteSheet::from_mem(include_bytes!("../assets/test.t3x"))
+        .expect("Failed to load sprite sheet");
+
+    let mut sprite = sheet.sprite(0).expect("Failed to get sprite");
+    sprite.set_scale(0.5, 0.5);
+    sprite.set_center(0.5, 0.5);
+    sprite.set_pos(200.0, 120.0);
+
     while apt.main_loop() {
         hid.scan_input();
         if hid.keys_down().intersects(KeyPad::START) {
@@ -27,7 +35,8 @@ fn main() {
 
             frame.scene(c2d.top_screen(), black, |scene| {
                 scene.draw_rect(0.0, 0.0, 400.0, 240.0, blue);
-                scene.draw_text(&life, 100.0, 100.0, 2.0, white);
+                scene.draw_text(&life, 30.0, 100.0, 2.0, white);
+                scene.draw_sprite(&sprite);
             });
             frame.scene(c2d.bottom_screen(), black, |scene| {
                 scene.draw_rect(0.0, 0.0, 320.0, 240.0, green);
