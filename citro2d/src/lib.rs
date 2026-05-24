@@ -221,6 +221,71 @@ impl Scene {
         }
     }
 
+    /// Draws a triangle with colors per vertex.
+    ///
+    /// # Arguments
+    ///
+    /// * `x0` - X coordinates of the first vertex
+    /// * `y0` - Y coordinates of the first vertex
+    /// * `x1` - X coordinates of the second vertex
+    /// * `y1` - Y coordinates of the second vertex
+    /// * `x2` - X coordinates of the third vertex
+    /// * `y2` - Y coordinates of the third vertex
+    /// * `color0` - First vertex color
+    /// * `color1` - Second vertex color
+    /// * `color2` - Third vertex color
+    pub fn draw_triangle(
+        &mut self,
+        x0: f32,
+        y0: f32,
+        color0: Color,
+        x1: f32,
+        y1: f32,
+        color1: Color,
+        x2: f32,
+        y2: f32,
+        color2: Color,
+    ) {
+        unsafe {
+            C2D_DrawTriangle(
+                x0,
+                y0,
+                color0.value,
+                x1,
+                y1,
+                color1.value,
+                x2,
+                y2,
+                color2.value,
+                0.0,
+            );
+        }
+    }
+
+    /// Draws a solid triangle.
+    ///
+    /// # Arguments
+    ///
+    /// * `x0` - X coordinates of the first vertex
+    /// * `y0` - Y coordinates of the first vertex
+    /// * `x1` - X coordinates of the second vertex
+    /// * `y1` - Y coordinates of the second vertex
+    /// * `x2` - X coordinates of the third vertex
+    /// * `y2` - Y coordinates of the third vertex
+    /// * `color` - Fill color
+    pub fn draw_triangle_solid(
+        &mut self,
+        x0: f32,
+        y0: f32,
+        x1: f32,
+        y1: f32,
+        x2: f32,
+        y2: f32,
+        color: Color,
+    ) {
+        self.draw_triangle(x0, y0, color, x1, y1, color, x2, y2, color);
+    }
+
     /// Draws a solid circle.
     ///
     /// # Arguments
