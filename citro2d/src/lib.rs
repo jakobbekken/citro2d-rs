@@ -216,9 +216,7 @@ impl Scene {
     /// * `h` - Height in pixels
     /// * `color` - Fill color
     pub fn draw_rect(&mut self, x: f32, y: f32, w: f32, h: f32, color: Color) {
-        unsafe {
-            C2D_DrawRectSolid(x, y, 0.0, w, h, color.value);
-        }
+        self.draw_rect_gradient(x, y, w, h, color, color, color, color);
     }
 
     /// Draws a rectangle with colors per corner.
@@ -280,20 +278,7 @@ impl Scene {
         y2: f32,
         color: Color,
     ) {
-        unsafe {
-            C2D_DrawTriangle(
-                x0,
-                y0,
-                color.value,
-                x1,
-                y1,
-                color.value,
-                x2,
-                y2,
-                color.value,
-                0.0,
-            );
-        }
+        self.draw_triangle_gradient(x0, y0, color, x1, y1, color, x2, y2, color);
     }
 
     /// Draws a triangle with colors per vertex.
@@ -341,22 +326,20 @@ impl Scene {
     ///
     /// # Arguments
     ///
-    /// * `x` - X coordinates of the top-left corner
-    /// * `y` - Y coordinates of the top-left corner
+    /// * `x` - X coordinates of the center
+    /// * `y` - Y coordinates of the center
     /// * `radius` - Radius in pixels
     /// * `color` - Fill color
     pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: Color) {
-        unsafe {
-            C2D_DrawCircleSolid(x, y, 0.0, radius, color.value);
-        }
+        self.draw_circle_gradient(x, y, radius, color, color, color, color);
     }
 
     /// Draws a circle with 4 cornered gradient.
     ///
     /// # Arguments
     ///
-    /// * `x` - X coordinates of the top-left corner
-    /// * `y` - Y coordinates of the top-left corner
+    /// * `x` - X coordinates of the center
+    /// * `y` - Y coordinates of the center
     /// * `radius` - Radius in pixels
     /// * `color_tl` - Top-left color
     /// * `color_tr` - Top-right color
@@ -397,9 +380,7 @@ impl Scene {
     /// * `thickness` - Line thickness in pixels
     /// * `color` - Line color
     pub fn draw_line(&mut self, x0: f32, y0: f32, x1: f32, y1: f32, thickness: f32, color: Color) {
-        unsafe {
-            C2D_DrawLine(x0, y0, color.value, x1, y1, color.value, thickness, 0.0);
-        }
+        self.draw_line_gradient(x0, y0, x1, y1, thickness, color, color);
     }
 
     /// Draws a line between two points with a color gradient.
