@@ -34,7 +34,7 @@ The easiest way to do this is to use the development flake with nix. This still 
 - `Citro2d` context owning the full graphics lifecycle
 - Closure-based `Frame` and `Scene` API that is impossible to misuse
 - `Color` as a const-constructable via `rgb` and `rgba`
-- Shape drawing with `draw_rect`, `draw_circle`, `draw_line`
+- Shape drawing with `draw_rect`, `draw_triangle`, `draw_circle`, `draw_line`
 - Text rendering via the 3DS system font
 - Sprite sheets of loaded `.t3x` files from memory or SD card
 - Sprites with position, scale, rotation and center pivot
