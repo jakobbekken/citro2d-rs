@@ -259,6 +259,43 @@ impl Scene {
         }
     }
 
+    /// Draws a solid triangle.
+    ///
+    /// # Arguments
+    ///
+    /// * `x0` - X coordinates of the first vertex
+    /// * `y0` - Y coordinates of the first vertex
+    /// * `x1` - X coordinates of the second vertex
+    /// * `y1` - Y coordinates of the second vertex
+    /// * `x2` - X coordinates of the third vertex
+    /// * `y2` - Y coordinates of the third vertex
+    /// * `color` - Fill color
+    pub fn draw_triangle(
+        &mut self,
+        x0: f32,
+        y0: f32,
+        x1: f32,
+        y1: f32,
+        x2: f32,
+        y2: f32,
+        color: Color,
+    ) {
+        unsafe {
+            C2D_DrawTriangle(
+                x0,
+                y0,
+                color.value,
+                x1,
+                y1,
+                color.value,
+                x2,
+                y2,
+                color.value,
+                0.0,
+            );
+        }
+    }
+
     /// Draws a triangle with colors per vertex.
     ///
     /// # Arguments
@@ -272,7 +309,7 @@ impl Scene {
     /// * `color0` - First vertex color
     /// * `color1` - Second vertex color
     /// * `color2` - Third vertex color
-    pub fn draw_triangle(
+    pub fn draw_triangle_gradient(
         &mut self,
         x0: f32,
         y0: f32,
@@ -300,28 +337,18 @@ impl Scene {
         }
     }
 
-    /// Draws a solid triangle.
+    /// Draws a solid circle.
     ///
     /// # Arguments
     ///
-    /// * `x0` - X coordinates of the first vertex
-    /// * `y0` - Y coordinates of the first vertex
-    /// * `x1` - X coordinates of the second vertex
-    /// * `y1` - Y coordinates of the second vertex
-    /// * `x2` - X coordinates of the third vertex
-    /// * `y2` - Y coordinates of the third vertex
+    /// * `x` - X coordinates of the top-left corner
+    /// * `y` - Y coordinates of the top-left corner
+    /// * `radius` - Radius in pixels
     /// * `color` - Fill color
-    pub fn draw_triangle_solid(
-        &mut self,
-        x0: f32,
-        y0: f32,
-        x1: f32,
-        y1: f32,
-        x2: f32,
-        y2: f32,
-        color: Color,
-    ) {
-        self.draw_triangle(x0, y0, color, x1, y1, color, x2, y2, color);
+    pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: Color) {
+        unsafe {
+            C2D_DrawCircleSolid(x, y, 0.0, radius, color.value);
+        }
     }
 
     /// Draws a circle with 4 cornered gradient.
@@ -356,20 +383,6 @@ impl Scene {
                 color_bl.value,
                 color_br.value,
             );
-        }
-    }
-
-    /// Draws a solid circle.
-    ///
-    /// # Arguments
-    ///
-    /// * `x` - X coordinates of the top-left corner
-    /// * `y` - Y coordinates of the top-left corner
-    /// * `radius` - Radius in pixels
-    /// * `color` - Fill color
-    pub fn draw_circle(&mut self, x: f32, y: f32, radius: f32, color: Color) {
-        unsafe {
-            C2D_DrawCircleSolid(x, y, 0.0, radius, color.value);
         }
     }
 
