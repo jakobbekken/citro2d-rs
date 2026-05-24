@@ -221,6 +221,44 @@ impl Scene {
         }
     }
 
+    /// Draws a rectangle with colors per corner.
+    ///
+    /// # Arguments
+    ///
+    /// * `x` - X coordinates of the top-left corner
+    /// * `y` - Y coordinates of the top-left corner
+    /// * `w` - Width in pixels
+    /// * `h` - Height in pixels
+    /// * `color_tl` - Top-left color
+    /// * `color_tr` - Top-right color
+    /// * `color_bl` - Bottom-left color
+    /// * `color_br` - Bottom-right color
+    pub fn draw_rect_gradient(
+        &mut self,
+        x: f32,
+        y: f32,
+        w: f32,
+        h: f32,
+        color_tl: Color,
+        color_tr: Color,
+        color_bl: Color,
+        color_br: Color,
+    ) {
+        unsafe {
+            C2D_DrawRectangle(
+                x,
+                y,
+                0.0,
+                w,
+                h,
+                color_tl.value,
+                color_tr.value,
+                color_bl.value,
+                color_br.value,
+            );
+        }
+    }
+
     /// Draws a triangle with colors per vertex.
     ///
     /// # Arguments
