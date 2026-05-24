@@ -324,6 +324,41 @@ impl Scene {
         self.draw_triangle(x0, y0, color, x1, y1, color, x2, y2, color);
     }
 
+    /// Draws a circle with 4 cornered gradient.
+    ///
+    /// # Arguments
+    ///
+    /// * `x` - X coordinates of the top-left corner
+    /// * `y` - Y coordinates of the top-left corner
+    /// * `radius` - Radius in pixels
+    /// * `color_tl` - Top-left color
+    /// * `color_tr` - Top-right color
+    /// * `color_bl` - Bottom-left color
+    /// * `color_br` - Bottom-right color
+    pub fn draw_circle_gradient(
+        &mut self,
+        x: f32,
+        y: f32,
+        radius: f32,
+        color_tl: Color,
+        color_tr: Color,
+        color_bl: Color,
+        color_br: Color,
+    ) {
+        unsafe {
+            C2D_DrawCircle(
+                x,
+                y,
+                0.0,
+                radius,
+                color_tl.value,
+                color_tr.value,
+                color_bl.value,
+                color_br.value,
+            );
+        }
+    }
+
     /// Draws a solid circle.
     ///
     /// # Arguments
