@@ -402,6 +402,32 @@ impl Scene {
         }
     }
 
+    /// Draws a line between two points with a color gradient.
+    ///
+    /// # Arguments
+    ///
+    /// * `x0` - X coordinates of the start point
+    /// * `y0` - Y coordinates of the start point
+    /// * `x1` - X coordinates of the end point
+    /// * `y1` - Y coordinates of the end point
+    /// * `thickness` - Line thickness in pixels
+    /// * `color0` - First point's color
+    /// * `color1` - Second point's color
+    pub fn draw_line_gradient(
+        &mut self,
+        x0: f32,
+        y0: f32,
+        x1: f32,
+        y1: f32,
+        thickness: f32,
+        color0: Color,
+        color1: Color,
+    ) {
+        unsafe {
+            C2D_DrawLine(x0, y0, color0.value, x1, y1, color1.value, thickness, 0.0);
+        }
+    }
+
     /// Draws a [`Text`] object.
     ///
     /// # Arguments
