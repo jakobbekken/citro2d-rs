@@ -369,6 +369,59 @@ impl Scene {
         }
     }
 
+    /// Draws a solid ellipse.
+    ///
+    /// # Arguments
+    ///
+    /// * `x` - X coordinates of the top-left corner
+    /// * `y` - Y coordinates of the top-left corner
+    /// * `w` - Width of the ellipse
+    /// * `h` - Height of the ellipse
+    /// * `radius` - Radius in pixels
+    /// * `color` - Fill color
+    pub fn draw_ellipse(&mut self, x: f32, y: f32, w: f32, h: f32, color: Color) {
+        self.draw_ellipse_gradient(x, y, w, h, color, color, color, color);
+    }
+
+    /// Draws an ellipse with 4 colors gradient.
+    ///
+    /// # Arguments
+    ///
+    /// * `x` - X coordinates of the top-left corner
+    /// * `y` - Y coordinates of the top-left corner
+    /// * `w` - Width of the ellipse
+    /// * `h` - Height of the ellipse
+    /// * `radius` - Radius in pixels
+    /// * `color_tl` - Top-left color
+    /// * `color_tr` - Top-right color
+    /// * `color_bl` - Bottom-left color
+    /// * `color_br` - Bottom-right color
+    pub fn draw_ellipse_gradient(
+        &mut self,
+        x: f32,
+        y: f32,
+        w: f32,
+        h: f32,
+        color_tl: Color,
+        color_tr: Color,
+        color_bl: Color,
+        color_br: Color,
+    ) {
+        unsafe {
+            C2D_DrawEllipse(
+                x,
+                y,
+                0.0,
+                w,
+                h,
+                color_tl.value,
+                color_tr.value,
+                color_bl.value,
+                color_br.value,
+            );
+        }
+    }
+
     /// Draws a line between two points.
     ///
     /// # Arguments
