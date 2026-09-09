@@ -4,6 +4,7 @@
 #![allow(non_snake_case)]
 #![allow(clippy::all)]
 #![allow(unexpected_cfgs)]
+#![allow(unnecessary_transmutes)]
 
 mod bindings {
     use libc::*;
