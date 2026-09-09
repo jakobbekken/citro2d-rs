@@ -4,3 +4,9 @@ members = [
     "citro2d", "citro2d-test",
 ]
 resolver = "2"
+
+[patch."https://github.com/rust3ds/ctru-rs.git"]
+ctru-sys = { path = "vendor/ctru-sys" }
+
+[patch."https://github.com/rust3ds/citro3d-rs.git"]
+citro3d-sys = { path = "vendor/citro3d-sys" }

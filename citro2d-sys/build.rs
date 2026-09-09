@@ -62,8 +62,8 @@ fn main() {
         .fit_macro_constants(true)
         .must_use_type("Result")
         .blocklist_type("u(8|16|32|64)")
-        .allowlist_file(".*/c2d/.*[.]h")
-        .allowlist_file(".*/citro2d[.]h")
+        .allowlist_file(r".*[\\/]c2d[\\/].*[.]h")
+        .allowlist_file(r".*[\\/]citro2d[.]h")
         .wrap_static_fns(true)
         .wrap_static_fns_path(out_dir.join(static_fns_path))
         .clang_args([
